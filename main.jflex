@@ -6,7 +6,8 @@
 %line
 %standalone
 %column
-%state unary, normal
+%xstate unary
+%state normal
 
 ws = [ \t]
 nl = \n | \r | \r\n
@@ -31,7 +32,7 @@ Ident = [A-Za-z]+
 {BinaryOperator} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
 {UnaryOperator} {System.out.printf("Unary operator %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
 <normal> {MinusSign} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
-{AssignmentOperator} {System.out.printf("Assignment operator %s at line %d, char %d\n", yytext(), yyline, yycolumn); yybegin(unary);}
+{AssignmentOperator} {System.out.printf("Assignment operator %s at line %d, char %d", yytext(), yyline, yycolumn); yybegin(unary);}
 {Separator} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
 {Comment} {System.out.printf("Comment %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
 {Keyword} {System.out.printf("Keyword %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
