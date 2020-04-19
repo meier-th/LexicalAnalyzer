@@ -9,6 +9,13 @@
 %xstate unary
 %state normal
 
+%{
+    private String getHexRepresentation(String decRepresentation) {
+        int value = Integer.parseInt(decRepresentation);
+        return Integer.toString(value, 16);
+    }    
+%}
+
 ws = [ \t]
 nl = \n | \r | \r\n
 wsnl = {ws} | {nl}
@@ -36,12 +43,12 @@ Ident = [A-Za-z]+
 {Separator} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
 {Comment} {System.out.printf("Comment %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
 {Keyword} {System.out.printf("Keyword %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
-{Const} {System.out.printf("Const %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
+{Const} {System.out.printf("Const %s at line %d, char %d. HEX representation: %s\n", yytext(), yyline, yycolumn, getHexRepresentation(yytext()));}
 {Ident} {System.out.printf("Ident %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
 {wsnl} {}
 <unary> {
     {MinusSign} {System.out.printf("Unary operator sign %s at line %d, char %d\n", yytext(), yyline, yycolumn); yybegin(normal);}
-    {Const} {System.out.printf("Const %s at line %d, char %d\n", yytext(), yyline, yycolumn); yybegin(normal);}
+    {Const} {System.out.printf("Const %s at line %d, char %d. HEX representation: %s\n", yytext(), yyline, yycolumn, getHexRepresentation(yytext())); yybegin(normal);}
     {Ident} {System.out.printf("Ident %s at line %d, char %d\n", yytext(), yyline, yycolumn); yybegin(normal);}
     {Separator} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline, yycolumn); yybegin(normal);}
 }
