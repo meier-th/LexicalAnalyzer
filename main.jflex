@@ -1,4 +1,4 @@
-import java.util.HashMap;
+
 %%
 
 %class Lexer
@@ -7,21 +7,29 @@ import java.util.HashMap;
 %standalone
 %column
 
-%{
-    HashMap<String, String> lexemMap = new HashMap<>();
-%}
+Program = {VariablesDeclaration}{wsnl}+{Computations}
+Computations = {OperatorsList}
+OperatorsList = {Operator} | {Operator}{wsnl}+{OperatorsList}
+VariablesList = {Ident} | {Ident}{wsnl}*","{VariablesList}
+VariablesDeclaration = "Var"{wsnl}+{VariablesList}
 
-Number = [0-9]+
-String = [A-Za-z]+
-Whitespace = [ \t]+
-Newline = \n | \r | \r\n
-Equals = "="
-Assignment = {String}{Whitespace}*{Equals}{Whitespace}*{Number}
-Comment = "//".*\n
+Const = [0-9]+
+Ident = [A-Za-z]+
+ws = [ \t]
+nl = \n | \r | \r\n
+wsnl = {ws} | {nl}
+
+Operand = {Ident} | {Const}
+BinaryOperator = "-" | "+" | "*" | "/" | "<" | ">" | "=="
+UnaryOperator = "-" | "not"
+Expression = {UnaryOperator} {wsnl}+ {Subexpression} | {Subexpression}
+Subexpression = "("{wsnl}* {Expression} {wsnl}*")" | {Operand} | {Subexpression}{wsnl}*{BinaryOperator}{wsnl}*{Subexpression}
+Assignment = {Ident}{wsnl}*"="{wsnl}*{Expression}
+Operator = {Assignment} | {ComplexOperator}
+ComplexOperator = "WHILE" {wsnl}+{Expression}{wsnl}+"DO"{wsnl}+{Operator}
+Comment = "//"[^\n]*\n
 
 %%
 
-{Assignment} {System.out.printf("Assignment: %s\n", yytext());}
-{Comment} {System.out.printf("Comment: %s\n", yytext());}
-{Newline} {}
+{Program} {System.out.println(yytext());}
 . {}
