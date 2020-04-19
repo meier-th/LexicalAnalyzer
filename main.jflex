@@ -6,30 +6,42 @@
 %line
 %standalone
 %column
+%state unary, normal
 
-Program = {VariablesDeclaration}{wsnl}+{Computations}
-Computations = {OperatorsList}
-OperatorsList = {Operator} | {Operator}{wsnl}+{OperatorsList}
-VariablesList = {Ident} | {Ident}{wsnl}*","{VariablesList}
-VariablesDeclaration = "Var"{wsnl}+{VariablesList}
-
-Const = [0-9]+
-Ident = [A-Za-z]+
 ws = [ \t]
 nl = \n | \r | \r\n
 wsnl = {ws} | {nl}
 
-Operand = {Ident} | {Const}
-BinaryOperator = "-" | "+" | "*" | "/" | "<" | ">" | "=="
-UnaryOperator = "-" | "not"
-Expression = {UnaryOperator} {wsnl}+ {Subexpression} | {Subexpression}
-Subexpression = "("{wsnl}* {Expression} {wsnl}*")" | {Operand} | {Subexpression}{wsnl}*{BinaryOperator}{wsnl}*{Subexpression}
-Assignment = {Ident}{wsnl}*"="{wsnl}*{Expression}
-Operator = {Assignment} | {ComplexOperator}
-ComplexOperator = "WHILE" {wsnl}+{Expression}{wsnl}+"DO"{wsnl}+{Operator}
+BinaryOperator = "+" | "*" | "/" | "<" | ">" | "=="
+UnaryOperator = "not"
+MinusSign = "-"
+AssignmentOperator = "="
+Separator = [),]
+SeparatorBeforeUnary = "("
 Comment = "//"[^\n]*\n
+Keyword = "Var" | "DO"
+KeywordBeforeUnary = "WHILE"
+Const = [0-9]+
+Ident = [A-Za-z]+
 
 %%
 
-{Program} {System.out.println(yytext());}
-. {}
+{SeparatorBeforeUnary} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline, yycolumn); yybegin(unary);}
+{KeywordBeforeUnary} {System.out.printf("Keyword %s at line %d, char %d\n", yytext(), yyline, yycolumn); yybegin(unary);}
+{BinaryOperator} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
+{UnaryOperator} {System.out.printf("Unary operator %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
+<normal> {MinusSign} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
+{AssignmentOperator} {System.out.printf("Assignment operator %s at line %d, char %d\n", yytext(), yyline, yycolumn); yybegin(unary);}
+{Separator} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
+{Comment} {System.out.printf("Comment %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
+{Keyword} {System.out.printf("Keyword %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
+{Const} {System.out.printf("Const %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
+{Ident} {System.out.printf("Ident %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
+{wsnl} {}
+<unary> {
+    {MinusSign} {System.out.printf("Unary operator sign %s at line %d, char %d\n", yytext(), yyline, yycolumn); yybegin(normal);}
+    {Const} {System.out.printf("Const %s at line %d, char %d\n", yytext(), yyline, yycolumn); yybegin(normal);}
+    {Ident} {System.out.printf("Ident %s at line %d, char %d\n", yytext(), yyline, yycolumn); yybegin(normal);}
+    {Separator} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline, yycolumn); yybegin(normal);}
+}
+. {System.out.printf("Error: unknown lexem %s at line %d, char %d\n", yytext(), yyline, yycolumn);}
