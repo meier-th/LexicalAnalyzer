@@ -1,6 +1,12 @@
-abc = 10 - kek
-bcd = -15 - 10 + 8
-// kek
-lol = 14
-___%%$
-fisting = 300$
+Var
+abc, bcd, cde, def,
+efg, ghi, hij
+abc > bcd
+ghi = 0
+// comment
+WHILE -def DO
+efg = hij + ghi
+// comment 2
+abc = 6 + 7
+cde = -abc
+def = (abc + bcd) * cde

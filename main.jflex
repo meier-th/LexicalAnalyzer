@@ -38,7 +38,7 @@ Ident = [A-Za-z]+
 {BinaryOperator} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
 {UnaryOperator} {System.out.printf("Unary operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
 <normal> {MinusSign} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
-{AssignmentOperator} {System.out.printf("Assignment operator %s at line %d, char %d: ", yytext(), yyline + 1, yycolumn); yybegin(unary);}
+{AssignmentOperator} {System.out.printf("Assignment operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(unary);}
 {Separator} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
 {Comment} {System.out.printf("Comment %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
 {Keyword} {System.out.printf("Keyword %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
@@ -50,5 +50,6 @@ Ident = [A-Za-z]+
     {Const} {System.out.printf("Const %s at line %d, char %d. HEX representation: %s\n", yytext(), yyline + 1, yycolumn, getHexRepresentation(yytext())); yybegin(normal);}
     {Ident} {System.out.printf("Ident %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(normal);}
     {Separator} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(normal);}
+    {SeparatorBeforeUnary} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(unary);}
 }
 . {System.err.printf("Error: unknown lexem %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
