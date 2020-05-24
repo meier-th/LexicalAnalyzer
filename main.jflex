@@ -19,29 +19,42 @@ ws = [ \t]
 nl = \n | \r | \r\n
 wsnl = {ws} | {nl}
 
-BinaryOperator = "+" | "*" | "/" | "<" | ">" | "=="
+Plus = "+"
+Multiply = "*"
+Divide = "/"
+Less = "<"
+More = ">"
+Equal = "=="
 UnaryOperator = "not"
 MinusSign = "-"
 AssignmentOperator = "="
-Separator = [),]
-SeparatorBeforeUnary = "("
+RightParenthesis = ")"
+Comma = ","
+LeftParenthesis = "("
 Comment = "//"[^\n]*\n
-Keyword = "Var" | "DO"
-KeywordBeforeUnary = "WHILE"
+Keyword = "Var"
+LoopStartKeyword = "DO"
+LoopConditionKeyword = "WHILE"
 Const = [0-9]+
 Ident = [A-Za-z]+
 
 %%
 
-{SeparatorBeforeUnary} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(unary);}
-{KeywordBeforeUnary} {System.out.printf("Keyword %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(unary);}
-{BinaryOperator} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
+{LeftParenthesis} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(unary);}
+{LoopConditionKeyword} {System.out.printf("Keyword %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(unary);}
+{Plus} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
+{Multiply} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
+{Divide} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
+{Less} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
+{More} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
+{Equal} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
 {UnaryOperator} {System.out.printf("Unary operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
 <normal> {MinusSign} {System.out.printf("Binary operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
 {AssignmentOperator} {System.out.printf("Assignment operator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(unary);}
-{Separator} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
+{Comma} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
 {Comment} {System.out.printf("Comment %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
 {Keyword} {System.out.printf("Keyword %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
+{LoopStartKeyword} {System.out.printf("Keyword %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
 {Const} {System.out.printf("Const %s at line %d, char %d. HEX representation: %s\n", yytext(), yyline + 1, yycolumn, getHexRepresentation(yytext()));}
 {Ident} {System.out.printf("Ident %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
 {wsnl} {}
@@ -49,7 +62,8 @@ Ident = [A-Za-z]+
     {MinusSign} {System.out.printf("Unary operator sign %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(normal);}
     {Const} {System.out.printf("Const %s at line %d, char %d. HEX representation: %s\n", yytext(), yyline + 1, yycolumn, getHexRepresentation(yytext())); yybegin(normal);}
     {Ident} {System.out.printf("Ident %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(normal);}
-    {Separator} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(normal);}
-    {SeparatorBeforeUnary} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(unary);}
+    {Comma} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(normal);}
+    {RightParenthesis} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(normal);}
+    {LeftParenthesis} {System.out.printf("Separator %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn); yybegin(unary);}
 }
 . {System.err.printf("Error: unknown lexem %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}

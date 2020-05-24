@@ -10,3 +10,4 @@ efg = hij + ghi
 abc = 6 + 7
 cde = -abc
 def = (abc + bcd) * cde
+abc = bcd - cde
