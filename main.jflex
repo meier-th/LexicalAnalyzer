@@ -1,6 +1,7 @@
 %%
 
 %class Lexer
+%implements YYParser.Lexer
 %unicode
 %line
 %standalone
