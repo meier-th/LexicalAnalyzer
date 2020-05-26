@@ -39,8 +39,7 @@ subexpression LESS subexpression
 subexpression MORE subexpression
 subexpression EQ subexpression
 ;
-operand: IDENT {$$ = $1;} | CONST {$$ = $1};
+operand: IDENT {$$ = $1;} | CONST {$$ = $1;};
 loopOperator: LCK expression LDK operator;
 
 %%
-
