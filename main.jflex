@@ -4,19 +4,21 @@
 %implements YYParser.Lexer
 %unicode
 %line
-%standalone
 %column
 %xstate unary
 %state normal
 
 %{
+
+    private Object lvalue;
+
     private String getHexRepresentation(String decRepresentation) {
         int value = Integer.parseInt(decRepresentation);
         return Integer.toString(value, 16);
     }
 
     public String getLVal() {
-        return "TODO";
+        return lvalue;
     }
 
     public void yyerror(String error) {
@@ -57,22 +59,22 @@ Ident = [A-Za-z]+
 {Less} { return LESS;}
 {More} { return MORE;}
 {Equal} { return EQ;}
-{UnaryOperator} { /*TODO*/ }
+{UnaryOperator} { return INV; }
 <normal> {MinusSign} { return MIN;}
 {AssignmentOperator} { return AO; }
-{Comma} { /*TODO*/ }
-{Comment} { return COM; }
+{Comma} { return COM; }
+{Comment} {}
 {Keyword} { return KEY;}
 {LoopStartKeyword} { return LDK;}
-{Const} {/*yylval.CONST = Integer.valueOf(yytext());*/ return CONST;}
-{Ident} { /*yylval.IDENT = yytext();*/ return IDENT;}
+{Const} { lvalue = Integer.valueOf(yytext()); return CONST;}
+{Ident} { lvalue = yytext(); return IDENT;}
 {wsnl} {}
 <unary> {
-    {MinusSign} {}
-    {Const} {}
-    {Ident} {}
-    {Comma} {}
-    {RightParenthesis} {}
-    {LeftParenthesis} {}
+    {MinusSign} {return UMINUS; }
+    {Const} { return CONST; }
+    {Ident} { return IDENT; }
+    {Comma} { return COM; }
+    {RightParenthesis} { return RP; }
+    {LeftParenthesis} { return LP; }
 }
 . {System.err.printf("Error: unknown lexem %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}
