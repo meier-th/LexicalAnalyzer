@@ -1,4 +1,6 @@
 %language "Java"
+%define package "parsing"
+%define public
 
 %code imports {
 

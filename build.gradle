@@ -6,3 +6,53 @@ repositories {
 
 dependencies {
 }
+
+ext.lexerSpec = file("${projectDir}/src/main/resources/main.jflex")
+ext.lexerFile = file("${projectDir}/src/main/java/parsing/Lexer.java")
+
+ext.grammarSpec = file("${projectDir}/src/main/resources/parser.y")
+ext.parserFile = file("${projectDir}/src/main/java/parsing/YYParser.java")
+
+task (actuallyGenerateParser, type: Exec) {
+    inputs.file grammarSpec
+    outputs.file parserFile
+    workingDir = "${projectDir}"
+    executable = 'bison'
+    args = [
+            "--warnings=none",
+            "--output=${projectDir}/src/main/java/parsing/YYParser.java",
+            "${grammarSpec}",
+    ]
+}
+
+task (actuallyGenerateLexer, type: Exec) {
+    inputs.file lexerSpec
+    outputs.file lexerFile
+    workingDir = "${projectDir}"
+    executable = "jflex"
+    args = [
+            "-d ${projectDir}/src/main/java/parsing",
+            "${lexerSpec}",
+    ]
+}
+
+task (generateParser, dependsOn: actuallyGenerateParser) << {
+    if (!parserFile.exists()) {
+        throw new GradleException("Failed to generate parser")
+    }
+}
+
+task (generateLexer, dependsOn: actuallyGenerateLexer) << {
+    if (!lexerFile.exists()) {
+        throw new GradleException("Failed to generate lexer");
+    }
+}
+
+task (cleanParser) << {
+    if (parserFile.exists()) {
+        parserFile.delete()
+    }
+    if (lexerFile.exists()) {
+        lexerFile.delete()
+    }
+}

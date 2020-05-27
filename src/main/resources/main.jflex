@@ -1,5 +1,7 @@
+package parsing;
 %%
 
+%public
 %class Lexer
 %implements YYParser.Lexer
 %unicode
@@ -7,6 +9,7 @@
 %column
 %xstate unary
 %state normal
+%int
 
 %{
 
@@ -17,7 +20,7 @@
         return Integer.toString(value, 16);
     }
 
-    public String getLVal() {
+    public Object getLVal() {
         return lvalue;
     }
 

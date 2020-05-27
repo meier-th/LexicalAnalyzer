@@ -30,22 +30,23 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+package parsing;
 
 
 
 /* "%code imports" blocks.  */
-/* "parser.y":3  */ /* lalr1.java:92  */
+/* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":5  */ /* lalr1.java:92  */
 
 
 
-/* "parser.java":42  */ /* lalr1.java:92  */
+/* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/java/parsing/YYParser.java":43  */ /* lalr1.java:92  */
 
 /**
- * A Bison parser, automatically generated from <tt>parser.y</tt>.
+ * A Bison parser, automatically generated from <tt>/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y</tt>.
  *
  * @author LALR (1) parser skeleton written by Paolo Bonzini.
  */
-class YYParser
+public class YYParser
 {
     /** Version number for the Bison executable that generated this parser.  */
   public static final String bisonVersion = "3.3.2";
@@ -340,20 +341,20 @@ class YYParser
       {
           case 18:
   if (yyn == 18)
-    /* "parser.y":42  */ /* lalr1.java:480  */
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":44  */ /* lalr1.java:480  */
     {yyval = ((String)(yystack.valueAt (0)));};
   break;
     
 
   case 19:
   if (yyn == 19)
-    /* "parser.y":42  */ /* lalr1.java:480  */
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":44  */ /* lalr1.java:480  */
     {yyval = ((Integer)(yystack.valueAt (0)));};
   break;
     
 
 
-/* "parser.java":357  */ /* lalr1.java:480  */
+/* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/java/parsing/YYParser.java":358  */ /* lalr1.java:480  */
         default: break;
       }
 
@@ -823,9 +824,9 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       0,    23,    23,    24,    25,    26,    26,    27,    27,    28,
-      28,    29,    30,    31,    32,    33,    33,    34,    42,    42,
-      43
+       0,    25,    25,    26,    27,    28,    28,    29,    29,    30,
+      30,    31,    32,    33,    34,    35,    35,    36,    44,    44,
+      45
     };
   }
 
@@ -910,5 +911,5 @@ private static final byte yycheck_[] = yycheck_init();
 
 }
 
-/* "parser.y":45  */ /* lalr1.java:1060  */
+/* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":47  */ /* lalr1.java:1060  */
 
