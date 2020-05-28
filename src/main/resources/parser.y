@@ -12,9 +12,7 @@
 %type <Expression> expression subexpression
 %type <Operand> operand
 %type <Operator> operator loopOperator
-%type <Program> program
-%type <Computations> operatorsList
-%type <VariablesDeclaration> variablesDeclaration
+%type <ASTNode> program computations variablesDeclaration
 %type <VariablesList> variablesList
 
 %left MIN PLUS MUL DIV
@@ -22,11 +20,10 @@
 
 %%
 
-program: variablesDeclaration computations;
-computations: operatorsList;
-variablesDeclaration: KEY variablesList;
-variablesList: IDENT | IDENT COM variablesList;
-operatorsList: operator | operator operatorsList;
+program: variablesDeclaration computations {$$ = new ASTNode($1, $2);};
+variablesDeclaration: KEY variablesList {$$ = new ASTNode(SemanticTypes.VARIABLES_DECLARATION);};
+variablesList: IDENT {$$ = new Variable($1);} | IDENT COM variablesList;
+computations: operator | operator operatorsList {$$ = new ASTNode(SemanticTypes.COMPUTATIONS);};
 operator: assignment | loopOperator;
 assignment: IDENT EQ expression;
 expression: INV subexpression |
