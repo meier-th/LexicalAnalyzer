@@ -10,14 +10,6 @@ public class BinaryOperator implements Operator {
 
     @Override
     public Value getResultValue() {
-        switch (operation) {
-            case EQUALS:
-                return new BooleanValue(leftOperand.compareTo(rightOperand) == 0);
-            case LESSER:
-                return new BooleanValue(leftOperand.compareTo(rightOperand) < 0);
-            case GREATER:
-                return new BooleanValue(leftOperand.compareTo(rightOperand) > 0);
-        }
         return leftOperand.executeOperation(rightOperand, operation);
     }
 
