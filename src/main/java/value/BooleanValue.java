@@ -8,17 +8,45 @@ public class BooleanValue implements Value {
 
     @Override
     public Value executeOperation(Value secondArg, Operator.Operations operation) {
+        if (secondArg == null)
+            secondArg = new BooleanValue(false);
         if (secondArg instanceof BooleanValue) {
+            boolean foreignValue = ((BooleanValue)secondArg).getValue();
             switch (operation) {
                 case ADDITION:
                     return or((BooleanValue) secondArg);
                 case MULTIPLICATION:
                     return and((BooleanValue) secondArg);
-                 // no more operations available
+                case GREATER:
+                    return new BooleanValue(Boolean.compare(value, foreignValue) > 0);
+                case LESSER:
+                    return new BooleanValue(Boolean.compare(value, foreignValue) < 0);
+                case EQUALS:
+                    return new BooleanValue(value == foreignValue);
+            }
+            // no more operations (division, multiplication) available
+            return new BooleanValue(false);
+        }
+        else {
+            int representation = this.value ? 1 : 0;
+            int foreignValue = ((IntegerValue)secondArg).getValue();
+            switch (operation) {
+                case EQUALS:
+                    return new BooleanValue(representation == foreignValue);
+                case LESSER:
+                    return new BooleanValue(representation < foreignValue);
+                case GREATER:
+                    return new BooleanValue(representation > foreignValue);
+                case SUBTRACTION:
+                    return new IntegerValue(representation - foreignValue);
+                case DIVISION:
+                    return new IntegerValue(representation / foreignValue);
+                case ADDITION:
+                    return new IntegerValue(representation + foreignValue);
+                default:
+                    return new IntegerValue(representation * foreignValue);
             }
         }
-        // can't perform operations with strings or ints
-        return null;
     }
 
     @Override
@@ -34,7 +62,25 @@ public class BooleanValue implements Value {
 
     @Override
     public int compareTo(Value value) {
-        return 0;
+        if (value instanceof BooleanValue) {
+            if (((BooleanValue) value).getValue()) {
+                if (this.value)
+                    return 0;
+                else
+                    return -1;
+            }
+            else {
+                if (this.value)
+                    return 1;
+                else
+                    return 0;
+            }
+        }
+        else {
+            int representation = this.value ? 1 : 0;
+            int foreignValue = ((IntegerValue) value).getValue();
+            return Integer.compare(representation, foreignValue);
+        }
     }
 
     public BooleanValue(boolean val) {

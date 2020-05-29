@@ -9,11 +9,6 @@ public class BinaryOperator implements Operator {
     private Value rightOperand;
 
     @Override
-    public Operations getOperation() {
-        return operation;
-    }
-
-    @Override
     public Value getResultValue() {
         switch (operation) {
             case EQUALS:

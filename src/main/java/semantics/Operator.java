@@ -17,7 +17,6 @@ public interface Operator {
         MINUS
     }
 
-    Operations getOperation();
     Value getResultValue();
 
 }
