@@ -1,9 +1,8 @@
 package semantics;
 
-import value.BooleanValue;
 import value.Value;
 
-public class BinaryOperator implements Operator {
+public class BinaryOperation implements Operation {
     private Operations operation;
     private Value leftOperand;
     private Value rightOperand;
@@ -13,7 +12,7 @@ public class BinaryOperator implements Operator {
         return leftOperand.executeOperation(rightOperand, operation);
     }
 
-    public BinaryOperator(Operator left, Operator right, Operations operation) {
+    public BinaryOperation(Operation left, Operation right, Operations operation) {
         this.leftOperand = left.getResultValue();
         this.rightOperand = right.getResultValue();
         this.operation = operation;

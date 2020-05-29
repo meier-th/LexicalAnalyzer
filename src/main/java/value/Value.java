@@ -1,9 +1,9 @@
 package value;
 
-import semantics.Operator;
+import semantics.Operation;
 
 public interface Value extends Comparable<Value> {
-    Value executeOperation(Value secondArg, Operator.Operations operation);
+    Value executeOperation(Value secondArg, Operation.Operations operation);
     Object getValue();
-    Value applyUnaryOperator(Operator.UnaryOperations operator);
+    Value applyUnaryOperator(Operation.UnaryOperations operator);
 }

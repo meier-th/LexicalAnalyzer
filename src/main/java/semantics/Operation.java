@@ -2,7 +2,7 @@ package semantics;
 
 import value.Value;
 
-public interface Operator {
+public interface Operation {
     enum Operations {
         ADDITION,
         SUBTRACTION,
@@ -14,7 +14,8 @@ public interface Operator {
     }
     enum UnaryOperations {
         NOT,
-        MINUS
+        MINUS,
+        NOTHING
     }
 
     Value getResultValue();

@@ -1,13 +1,13 @@
 package value;
 
-import semantics.Operator;
+import semantics.Operation;
 
 public class BooleanValue implements Value {
 
     private boolean value;
 
     @Override
-    public Value executeOperation(Value secondArg, Operator.Operations operation) {
+    public Value executeOperation(Value secondArg, Operation.Operations operation) {
         if (secondArg == null)
             secondArg = new BooleanValue(false);
         if (secondArg instanceof BooleanValue) {
@@ -50,8 +50,10 @@ public class BooleanValue implements Value {
     }
 
     @Override
-    public Value applyUnaryOperator(Operator.UnaryOperations operator) {
-        // it's either not or -
+    public Value applyUnaryOperator(Operation.UnaryOperations operator) {
+        if (operator == Operation.UnaryOperations.NOTHING)
+            return new BooleanValue(value);
+        // it's either NOT or '-'
         return new BooleanValue(!value);
     }
 

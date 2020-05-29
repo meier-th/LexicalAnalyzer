@@ -2,7 +2,7 @@ package semantics;
 
 import value.Value;
 
-public class UnaryOperator implements Operator {
+public class UnaryOperation implements Operation {
 
     private UnaryOperations operation;
     private Value operand;
@@ -12,8 +12,13 @@ public class UnaryOperator implements Operator {
         return operand.applyUnaryOperator(operation);
     }
 
-    public UnaryOperator(UnaryOperations operation, Operator operand) {
+    public UnaryOperation(UnaryOperations operation, Operation operand) {
         this.operation = operation;
         this.operand = operand.getResultValue();
+    }
+
+    public UnaryOperation(Variable operand) {
+        this.operation = UnaryOperations.NOTHING;
+        this.operand = operand.getValue();
     }
 }

@@ -1,13 +1,13 @@
 package value;
 
-import semantics.Operator;
+import semantics.Operation;
 
 public class IntegerValue implements Value {
 
     private int value;
 
     @Override
-    public Value executeOperation(Value secondArg, Operator.Operations operation) {
+    public Value executeOperation(Value secondArg, Operation.Operations operation) {
         int foreignValue;
         if (secondArg instanceof IntegerValue)
             foreignValue = ((IntegerValue) secondArg).getValue();
@@ -38,10 +38,11 @@ public class IntegerValue implements Value {
     }
 
     @Override
-    public Value applyUnaryOperator(Operator.UnaryOperations operator) {
-        if (operator == Operator.UnaryOperations.MINUS) {
+    public Value applyUnaryOperator(Operation.UnaryOperations operator) {
+        if (operator == Operation.UnaryOperations.NOTHING)
+            return new IntegerValue(value);
+        if (operator == Operation.UnaryOperations.MINUS)
             return new IntegerValue(value * (-1));
-        }
         return new IntegerValue(~value);
     }
 
