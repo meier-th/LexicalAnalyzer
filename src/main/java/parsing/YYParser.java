@@ -391,14 +391,14 @@ public class YYParser
   case 9:
   if (yyn == 9)
     /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":32  */ /* lalr1.java:480  */
-    {yyval = new Assignment(((String)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0)))); ((Assignment)yyval).execute();};
+    {yyval = new Assignment(((String)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0)))); OperationsHolder.addAssignment((Assignment)yyval);};
   break;
     
 
   case 10:
   if (yyn == 10)
     /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":33  */ /* lalr1.java:480  */
-    {yyval = new LoopOperator(((Operation)(yystack.valueAt (2))), ((Operator)(yystack.valueAt (0))));};
+    {yyval = new LoopOperator(((Operation)(yystack.valueAt (2))), ((Operator)(yystack.valueAt (0)))); OperationsHolder.executeBeforeLoop(); ((LoopOperator)yyval).execute();};
   break;
     
 

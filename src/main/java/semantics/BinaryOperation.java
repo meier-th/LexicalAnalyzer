@@ -4,21 +4,19 @@ import value.Value;
 
 public class BinaryOperation implements Operation {
     private Operations operation;
-    private Value leftOperandValue;
-    private Value rightOperandValue;
     private Operation leftOperand;
     private Operation rightOperand;
 
     @Override
     public Value getResultValue() {
+        Value leftOperandValue = leftOperand.getResultValue();
+        Value rightOperandValue = rightOperand.getResultValue();
         return leftOperandValue.executeOperation(rightOperandValue, operation);
     }
 
     public BinaryOperation(Operation left, Operation right, Operations operation) {
         this.leftOperand = left;
         this.rightOperand = right;
-        this.leftOperandValue = left.getResultValue();
-        this.rightOperandValue = right.getResultValue();
         this.operation = operation;
     }
 

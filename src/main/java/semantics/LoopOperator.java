@@ -14,6 +14,7 @@ public class LoopOperator implements Operator {
         if (condValue instanceof BooleanValue)
             while (((BooleanValue)condValue).getValue()) {
                 action.execute();
+                condValue = condition.getResultValue();
             }
     }
 

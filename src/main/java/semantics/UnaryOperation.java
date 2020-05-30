@@ -7,23 +7,25 @@ public class UnaryOperation implements Operation {
     private UnaryOperations operation;
     private Operation operand;
     private Variable varOperand;
-    private Value operandValue;
 
     @Override
     public Value getResultValue() {
+        Value operandValue;
+        if (operation == UnaryOperations.NOTHING)
+            operandValue = varOperand.getValue();
+        else
+            operandValue = operand.getResultValue();
         return operandValue.applyUnaryOperator(operation);
     }
 
     public UnaryOperation(UnaryOperations operation, Operation operand) {
         this.operation = operation;
         this.operand = operand;
-        this.operandValue = operand.getResultValue();
     }
 
     public UnaryOperation(Variable operand) {
         this.operation = UnaryOperations.NOTHING;
-        varOperand = operand;
-        this.operandValue = operand.getValue();
+        this.varOperand = operand;
     }
 
     @Override

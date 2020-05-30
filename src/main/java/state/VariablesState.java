@@ -20,6 +20,7 @@ public class VariablesState {
     }
 
     public static void printVariables() {
+        OperationsHolder.executeBeforeEnd();
         System.out.println("Final variables' values:");
         variables.forEach((name, var) -> {
             if (var.getValue() == null)
