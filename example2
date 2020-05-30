@@ -1,8 +1,0 @@
-Var
-$abc, %bcd, !cde, def,
-efg, ghi, hij
-abc > bcd
-ghi = 0.78
-// comment
-WHILE -def DO
-efg = hij + ghi

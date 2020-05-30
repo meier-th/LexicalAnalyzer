@@ -1,5 +1,6 @@
 package semantics;
 
+import value.IntegerValue;
 import value.Value;
 
 public class UnaryOperation implements Operation {
@@ -12,7 +13,10 @@ public class UnaryOperation implements Operation {
     public Value getResultValue() {
         Value operandValue;
         if (operation == UnaryOperations.NOTHING)
-            operandValue = varOperand.getValue();
+            if (varOperand != null)
+                operandValue = varOperand.getValue();
+            else
+                operandValue = new IntegerValue(0);
         else
             operandValue = operand.getResultValue();
         return operandValue.applyUnaryOperator(operation);
@@ -31,7 +35,10 @@ public class UnaryOperation implements Operation {
     @Override
     public void print(String prefix) {
         if (operation == UnaryOperations.NOTHING) {
-            varOperand.print(prefix);
+            if (varOperand != null)
+                varOperand.print(prefix);
+            else
+                System.out.println(prefix+"Undeclared variable");
         }
         else {
             System.out.println(prefix + "Unary operation");

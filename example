@@ -1,10 +1,12 @@
 Var
-abc, bcd
+abc, bcd, cde
+abc = 10 / 2
 abc = 0
 WHILE abc < 2 DO
 abc = abc + 1
-bcd = 4
+bcd = 8 - 4
 // comment
 WHILE bcd > abc DO
 abc = abc + 1
 bcd = -3 * ( abc + bcd ) * 3
+cde = not abc == bcd
