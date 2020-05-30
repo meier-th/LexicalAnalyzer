@@ -1,6 +1,6 @@
 package semantics;
 
-public interface Listable {
+public interface Listable extends Printable {
 
     Listable getNext();
 

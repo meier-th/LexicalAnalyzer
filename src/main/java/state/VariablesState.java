@@ -1,6 +1,8 @@
 package state;
 
 import semantics.Variable;
+import value.BooleanValue;
+import value.IntegerValue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +17,18 @@ public class VariablesState {
 
     public static Variable getVariable(String name) {
         return variables.get(name);
+    }
+
+    public static void printVariables() {
+        System.out.println("Final variables' values:");
+        variables.forEach((name, var) -> {
+            if (var.getValue() == null)
+                System.out.println(var.getName() + " = null");
+            if (var.getValue() instanceof IntegerValue)
+                System.out.printf("%s = %d\n", var.getName(), ((IntegerValue)var.getValue()).getValue());
+            else
+                System.out.printf("%s = %s\n", var.getName(), ((BooleanValue)var.getValue()).getValue() ? "true": "false");
+        });
     }
 
 }

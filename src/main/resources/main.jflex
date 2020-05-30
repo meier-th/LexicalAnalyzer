@@ -7,8 +7,6 @@ package parsing;
 %unicode
 %line
 %column
-%xstate unary
-%state normal
 %int
 
 %{
@@ -63,7 +61,7 @@ Ident = [A-Za-z]+
 {More} { return MORE;}
 {Equal} { return EQ;}
 {UnaryOperator} { return INV; }
-<normal> {MinusSign} { return MIN;}
+{MinusSign} { return MIN;}
 {AssignmentOperator} { return AO; }
 {Comma} { return COM; }
 {Comment} {}
@@ -71,13 +69,6 @@ Ident = [A-Za-z]+
 {LoopStartKeyword} { return LDK;}
 {Const} { lvalue = Integer.valueOf(yytext()); return CONST;}
 {Ident} { lvalue = yytext(); return IDENT;}
+{RightParenthesis} { return RP; }
 {wsnl} {}
-<unary> {
-    {MinusSign} {return UMINUS; }
-    {Const} { return CONST; }
-    {Ident} { return IDENT; }
-    {Comma} { return COM; }
-    {RightParenthesis} { return RP; }
-    {LeftParenthesis} { return LP; }
-}
 . {System.err.printf("Error: unknown lexem %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);}

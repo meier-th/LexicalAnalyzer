@@ -1,18 +1,7 @@
 package semantics;
 
-public abstract class Operator implements Listable {
+public interface Operator extends Printable {
 
-    private Operator nextOperator;
-
-    @Override
-    public Listable getNext() {
-        return nextOperator;
-    }
-
-    public void setNext(Operator operator) {
-        this.nextOperator = operator;
-    }
-
-    public abstract void execute();
+   void execute();
 
 }

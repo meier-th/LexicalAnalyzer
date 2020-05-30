@@ -59,4 +59,12 @@ public class Variable implements Listable {
     public Listable getNext() {
         return nextVariable;
     }
+
+    @Override
+    public void print(String prefix) {
+        if (name.equals(""))
+            System.out.println(prefix + "Const " + value.getValue());
+        else
+            System.out.println(prefix + "Variable " + name);
+    }
 }

@@ -102,11 +102,9 @@ public class YYParser
     /** Token number,to be returned by the scanner.  */
     static final int INV = 272;
     /** Token number,to be returned by the scanner.  */
-    static final int UMINUS = 273;
+    static final int CONST = 273;
     /** Token number,to be returned by the scanner.  */
-    static final int CONST = 274;
-    /** Token number,to be returned by the scanner.  */
-    static final int IDENT = 275;
+    static final int IDENT = 274;
 
 
     
@@ -343,181 +341,167 @@ public class YYParser
       {
           case 2:
   if (yyn == 2)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":26  */ /* lalr1.java:480  */
-    {yyval = new Program(((SemanticList)(yystack.valueAt (1))), ((SemanticList)(yystack.valueAt (0))));};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":27  */ /* lalr1.java:480  */
+    {yyval = new Program(((SemanticList)(yystack.valueAt (1))), ((SemanticList)(yystack.valueAt (0)))); ((Program)yyval).print(""); VariablesState.printVariables();};
   break;
     
 
   case 3:
   if (yyn == 3)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":27  */ /* lalr1.java:480  */
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":28  */ /* lalr1.java:480  */
     {yyval = new SemanticList(SemanticList.SemanticTypes.VARIABLES_DECLARATION, ((Variable)(yystack.valueAt (0))));};
   break;
     
 
   case 4:
   if (yyn == 4)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":28  */ /* lalr1.java:480  */
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":29  */ /* lalr1.java:480  */
     {yyval = Variable.createVariable(((String)(yystack.valueAt (0))));};
   break;
     
 
   case 5:
   if (yyn == 5)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":28  */ /* lalr1.java:480  */
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":29  */ /* lalr1.java:480  */
     {yyval = Variable.createVariable(((String)(yystack.valueAt (2))), ((Variable)(yystack.valueAt (0))));};
   break;
     
 
   case 6:
   if (yyn == 6)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":29  */ /* lalr1.java:480  */
-    {yyval = new SemanticList(SemanticList.SemanticTypes.COMPUTATIONS, ((Operator)(yystack.valueAt (0))));};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":30  */ /* lalr1.java:480  */
+    {yyval = new SemanticList(SemanticList.SemanticTypes.COMPUTATIONS, ((OperatorsList)(yystack.valueAt (0))));};
   break;
     
 
   case 7:
   if (yyn == 7)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":30  */ /* lalr1.java:480  */
-    {yyval = ((Operator)(yystack.valueAt (0)));};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":31  */ /* lalr1.java:480  */
+    {yyval = new OperatorsList(((Operator)(yystack.valueAt (0))));};
   break;
     
 
   case 8:
   if (yyn == 8)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":30  */ /* lalr1.java:480  */
-    {yyval = ((Operator)(yystack.valueAt (1))); ((Operator)yyval).setNext(((Operator)(yystack.valueAt (0))));};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":31  */ /* lalr1.java:480  */
+    {yyval = new OperatorsList(((Operator)(yystack.valueAt (1))), ((OperatorsList)(yystack.valueAt (0))));};
   break;
     
 
   case 9:
   if (yyn == 9)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":31  */ /* lalr1.java:480  */
-    {yyval = ((Operator)(yystack.valueAt (0)));};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":32  */ /* lalr1.java:480  */
+    {yyval = new Assignment(((String)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0)))); ((Assignment)yyval).execute();};
   break;
     
 
   case 10:
   if (yyn == 10)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":31  */ /* lalr1.java:480  */
-    {yyval = ((Operator)(yystack.valueAt (0)));};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":33  */ /* lalr1.java:480  */
+    {yyval = new LoopOperator(((Operation)(yystack.valueAt (2))), ((Operator)(yystack.valueAt (0))));};
   break;
     
 
   case 11:
   if (yyn == 11)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":32  */ /* lalr1.java:480  */
-    {yyval = new Assignment(((String)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))));};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":34  */ /* lalr1.java:480  */
+    {yyval = new UnaryOperation(Operation.UnaryOperations.NOT, ((Operation)(yystack.valueAt (0))));};
   break;
     
 
   case 12:
   if (yyn == 12)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":33  */ /* lalr1.java:480  */
-    {yyval = new UnaryOperation(Operation.UnaryOperations.NOT, ((Operation)(yystack.valueAt (0))));};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":35  */ /* lalr1.java:480  */
+    {yyval = new UnaryOperation(Operation.UnaryOperations.MINUS, ((Operation)(yystack.valueAt (0))));};
   break;
     
 
   case 13:
   if (yyn == 13)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":34  */ /* lalr1.java:480  */
-    {yyval = new UnaryOperation(Operation.UnaryOperations.MINUS, ((Operation)(yystack.valueAt (0))));};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":36  */ /* lalr1.java:480  */
+    {yyval = ((Operation)(yystack.valueAt (0)));};
   break;
     
 
   case 14:
   if (yyn == 14)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":35  */ /* lalr1.java:480  */
-    {yyval = ((Operation)(yystack.valueAt (0)));};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":37  */ /* lalr1.java:480  */
+    {yyval = ((Operation)(yystack.valueAt (1)));};
   break;
     
 
   case 15:
   if (yyn == 15)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":36  */ /* lalr1.java:480  */
-    {yyval = ((Operation)(yystack.valueAt (1)));};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":37  */ /* lalr1.java:480  */
+    {yyval = new UnaryOperation(((Variable)(yystack.valueAt (0))));};
   break;
     
 
   case 16:
   if (yyn == 16)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":36  */ /* lalr1.java:480  */
-    {yyval = new UnaryOperation(((Variable)(yystack.valueAt (0))));};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":38  */ /* lalr1.java:480  */
+    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.SUBTRACTION);};
   break;
     
 
   case 17:
   if (yyn == 17)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":37  */ /* lalr1.java:480  */
-    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.SUBTRACTION);};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":39  */ /* lalr1.java:480  */
+    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.ADDITION);};
   break;
     
 
   case 18:
   if (yyn == 18)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":38  */ /* lalr1.java:480  */
-    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.ADDITION);};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":40  */ /* lalr1.java:480  */
+    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.MULTIPLICATION);};
   break;
     
 
   case 19:
   if (yyn == 19)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":39  */ /* lalr1.java:480  */
-    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.MULTIPLICATION);};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":41  */ /* lalr1.java:480  */
+    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.DIVISION);};
   break;
     
 
   case 20:
   if (yyn == 20)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":40  */ /* lalr1.java:480  */
-    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.DIVISION);};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":42  */ /* lalr1.java:480  */
+    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.LESSER);};
   break;
     
 
   case 21:
   if (yyn == 21)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":41  */ /* lalr1.java:480  */
-    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.LESSER);};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":43  */ /* lalr1.java:480  */
+    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.GREATER);};
   break;
     
 
   case 22:
   if (yyn == 22)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":42  */ /* lalr1.java:480  */
-    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.GREATER);};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":44  */ /* lalr1.java:480  */
+    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.EQUALS);};
   break;
     
 
   case 23:
   if (yyn == 23)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":43  */ /* lalr1.java:480  */
-    {yyval = new BinaryOperation(((Operation)(yystack.valueAt (2))), ((Operation)(yystack.valueAt (0))), Operation.Operations.EQUALS);};
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":46  */ /* lalr1.java:480  */
+    {yyval = Variable.getVariable(((String)(yystack.valueAt (0))));};
   break;
     
 
   case 24:
   if (yyn == 24)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":45  */ /* lalr1.java:480  */
-    {yyval = Variable.getVariable(((String)(yystack.valueAt (0))));};
-  break;
-    
-
-  case 25:
-  if (yyn == 25)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":45  */ /* lalr1.java:480  */
+    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":46  */ /* lalr1.java:480  */
     {yyval = Variable.createLiteral(((Integer)(yystack.valueAt (0))));};
   break;
     
 
-  case 26:
-  if (yyn == 26)
-    /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":46  */ /* lalr1.java:480  */
-    {yyval = new LoopOperator(((Operation)(yystack.valueAt (2))), ((Operator)(yystack.valueAt (0))));};
-  break;
-    
 
-
-/* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/java/parsing/YYParser.java":521  */ /* lalr1.java:480  */
+/* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/java/parsing/YYParser.java":505  */ /* lalr1.java:480  */
         default: break;
       }
 
@@ -824,7 +808,7 @@ public class YYParser
     return yyvalue == yytable_ninf_;
   }
 
-  private static final byte yypact_ninf_ = -17;
+  private static final byte yypact_ninf_ = -15;
   private static final byte yytable_ninf_ = -1;
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
@@ -834,11 +818,11 @@ public class YYParser
   {
     return new byte[]
     {
-      -1,   -13,     8,    19,     5,   -17,   -17,     4,    -3,   -17,
-     -17,    19,   -17,   -17,   -13,     4,     6,     6,   -17,   -17,
-      26,    18,   -17,     4,   -17,   -17,    29,    18,    18,    19,
-       6,     6,     6,     6,     6,     6,     6,   -17,   -17,   -17,
-     -10,   -10,   -10,   -10,    18,    18,    18
+       1,   -11,     9,    -6,     8,   -15,   -15,    15,    19,   -15,
+     -15,    -6,   -11,    15,     4,     4,   -15,   -15,    17,    25,
+     -15,    15,   -15,   -15,    20,    25,    25,    -6,     4,     4,
+       4,     4,     4,     4,     4,   -15,   -15,   -15,    -9,    -9,
+      -9,    -9,    25,    25,    25
     };
   }
 
@@ -851,10 +835,10 @@ public class YYParser
     return new byte[]
     {
        0,     0,     0,     0,     4,     3,     1,     0,     0,     2,
-       6,     7,     9,    10,     0,     0,     0,     0,    25,    24,
-       0,    14,    16,     0,     8,     5,     0,    12,    13,     0,
-       0,     0,     0,     0,     0,     0,     0,    11,    15,    26,
-      17,    18,    19,    20,    22,    21,    23
+       6,     7,     0,     0,     0,     0,    24,    23,     0,    13,
+      15,     0,     8,     5,     0,    12,    11,     0,     0,     0,
+       0,     0,     0,     0,     0,     9,    14,    10,    16,    17,
+      18,    19,    21,    20,    22
     };
   }
 
@@ -864,8 +848,7 @@ public class YYParser
   {
     return new byte[]
     {
-     -17,   -17,   -17,    23,   -17,    27,    11,   -17,   -12,   -16,
-     -17,   -17
+     -15,   -15,   -15,    16,   -15,    18,     3,   -10,   -14,   -15
     };
   }
 
@@ -875,8 +858,7 @@ public class YYParser
   {
     return new byte[]
     {
-      -1,     2,     3,     5,     9,    10,    11,    12,    20,    21,
-      22,    13
+      -1,     2,     3,     5,     9,    10,    11,    18,    19,    20
     };
   }
 
@@ -888,11 +870,11 @@ public class YYParser
   {
     return new byte[]
     {
-      27,    28,     1,    26,    34,    35,    36,     4,     6,    14,
-      15,    37,    15,    23,    40,    41,    42,    43,    44,    45,
-      46,    16,    17,    18,    19,    18,    19,     7,    30,    31,
-      32,    33,    34,    35,    36,    29,    38,    25,    24,     8,
-      39
+      25,    26,     7,    24,     1,    32,    33,    34,     4,     6,
+      13,    35,    12,     8,    38,    39,    40,    41,    42,    43,
+      44,    13,    16,    17,    21,    14,    27,    36,    23,    22,
+      37,     0,    15,    16,    17,    28,    29,    30,    31,    32,
+      33,    34
     };
   }
 
@@ -901,11 +883,11 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-      16,    17,     3,    15,    14,    15,    16,    20,     0,     4,
-       6,    23,     6,    16,    30,    31,    32,    33,    34,    35,
-      36,    17,    18,    19,    20,    19,    20,     8,    10,    11,
-      12,    13,    14,    15,    16,     9,     7,    14,    11,    20,
-      29
+      14,    15,     8,    13,     3,    14,    15,    16,    19,     0,
+       6,    21,     4,    19,    28,    29,    30,    31,    32,    33,
+      34,     6,    18,    19,     5,    10,     9,     7,    12,    11,
+      27,    -1,    17,    18,    19,    10,    11,    12,    13,    14,
+      15,    16
     };
   }
 
@@ -916,11 +898,11 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       0,     3,    22,    23,    20,    24,     0,     8,    20,    25,
-      26,    27,    28,    32,     4,     6,    17,    18,    19,    20,
-      29,    30,    31,    16,    26,    24,    29,    30,    30,     9,
-      10,    11,    12,    13,    14,    15,    16,    29,     7,    27,
-      30,    30,    30,    30,    30,    30,    30
+       0,     3,    21,    22,    19,    23,     0,     8,    19,    24,
+      25,    26,     4,     6,    10,    17,    18,    19,    27,    28,
+      29,     5,    25,    23,    27,    28,    28,     9,    10,    11,
+      12,    13,    14,    15,    16,    27,     7,    26,    28,    28,
+      28,    28,    28,    28,    28
     };
   }
 
@@ -930,9 +912,9 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       0,    21,    22,    23,    24,    24,    25,    26,    26,    27,
-      27,    28,    29,    29,    29,    30,    30,    30,    30,    30,
-      30,    30,    30,    30,    31,    31,    32
+       0,    20,    21,    22,    23,    23,    24,    25,    25,    26,
+      26,    27,    27,    27,    28,    28,    28,    28,    28,    28,
+      28,    28,    28,    29,    29
     };
   }
 
@@ -942,9 +924,9 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       0,     2,     2,     2,     1,     3,     1,     1,     2,     1,
-       1,     3,     2,     2,     1,     3,     1,     3,     3,     3,
-       3,     3,     3,     3,     1,     1,     4
+       0,     2,     2,     2,     1,     3,     1,     1,     2,     3,
+       4,     2,     2,     1,     3,     1,     3,     3,     3,     3,
+       3,     3,     3,     1,     1
     };
   }
 
@@ -956,8 +938,7 @@ private static final byte yycheck_[] = yycheck_init();
     return new short[]
     {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275
+     265,   266,   267,   268,   269,   270,   271,   272,   273,   274
     };
   }
 
@@ -969,10 +950,10 @@ private static final byte yycheck_[] = yycheck_init();
     return new String[]
     {
   "$end", "error", "$undefined", "KEY", "COM", "AO", "LP", "RP", "LCK",
-  "LDK", "MIN", "PLUS", "MUL", "DIV", "MORE", "LESS", "EQ", "INV",
-  "UMINUS", "CONST", "IDENT", "$accept", "program", "variablesDeclaration",
-  "variablesList", "computations", "operatorsList", "operator",
-  "assignment", "expression", "subexpression", "operand", "loopOperator", null
+  "LDK", "MIN", "PLUS", "MUL", "DIV", "MORE", "LESS", "EQ", "INV", "CONST",
+  "IDENT", "$accept", "program", "variablesDeclaration", "variablesList",
+  "computations", "operatorsList", "operator", "expression",
+  "subexpression", "operand", null
     };
   }
 
@@ -982,9 +963,9 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       0,    26,    26,    27,    28,    28,    29,    30,    30,    31,
-      31,    32,    33,    34,    35,    36,    36,    37,    38,    39,
-      40,    41,    42,    43,    45,    45,    46
+       0,    27,    27,    28,    29,    29,    30,    31,    31,    32,
+      33,    34,    35,    36,    37,    37,    38,    39,    40,    41,
+      42,    43,    44,    46,    46
     };
   }
 
@@ -1042,7 +1023,7 @@ private static final byte yycheck_[] = yycheck_init();
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20
+      15,    16,    17,    18,    19
     };
   }
 
@@ -1054,15 +1035,15 @@ private static final byte yycheck_[] = yycheck_init();
       return yyundef_token_;
   }
 
-  private static final int yylast_ = 40;
-  private static final int yynnts_ = 12;
+  private static final int yylast_ = 41;
+  private static final int yynnts_ = 10;
   private static final int yyempty_ = -2;
   private static final int yyfinal_ = 6;
   private static final int yyterror_ = 1;
   private static final int yyerrcode_ = 256;
-  private static final int yyntokens_ = 21;
+  private static final int yyntokens_ = 20;
 
-  private static final int yyuser_token_number_max_ = 275;
+  private static final int yyuser_token_number_max_ = 274;
   private static final int yyundef_token_ = 2;
 
 /* User implementation code.  */

@@ -3,7 +3,7 @@ package semantics;
 import value.BooleanValue;
 import value.Value;
 
-public class LoopOperator extends Operator {
+public class LoopOperator implements Operator {
 
     private Operation condition;
     private Operator action;
@@ -22,4 +22,12 @@ public class LoopOperator extends Operator {
         this.action = action;
     }
 
+    @Override
+    public void print(String prefix) {
+        System.out.println(prefix+"Loop operator");
+        System.out.println(prefix+"\tKeyword WHILE");
+        condition.print(prefix+'\t');
+        System.out.println(prefix+"\tKeyword DO");
+        action.print(prefix+'\t');
+    }
 }

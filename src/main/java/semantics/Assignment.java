@@ -2,7 +2,7 @@ package semantics;
 
 import state.VariablesState;
 
-public class Assignment extends Operator {
+public class Assignment implements Operator {
 
     private String variableName;
     private Operation value;
@@ -19,4 +19,14 @@ public class Assignment extends Operator {
             var.setValue(value.getResultValue());
     }
 
+    @Override
+    public void print(String prefix) {
+        System.out.println(prefix+"Assignment");
+        if (VariablesState.getVariable(variableName) != null)
+            VariablesState.getVariable(variableName).print(prefix+'\t');
+        else
+            System.out.println(prefix+ "\tUndeclared variable " +variableName);
+        System.out.println(prefix + "\tAssignment operator =");
+        value.print(prefix+'\t');
+    }
 }

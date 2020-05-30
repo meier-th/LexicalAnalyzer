@@ -1,10 +1,20 @@
 package semantics;
 
-public class SemanticList {
+public class SemanticList implements Printable {
 
     public enum SemanticTypes {
-        COMPUTATIONS,
-        VARIABLES_DECLARATION
+        COMPUTATIONS {
+            @Override
+            public String toString() {
+                return "Computations";
+            }
+        },
+        VARIABLES_DECLARATION {
+            @Override
+            public String toString() {
+                return "Variables declaration";
+            }
+        }
     }
 
     private SemanticTypes type;
@@ -18,4 +28,15 @@ public class SemanticList {
         this.firstChild = firstChild;
     }
 
+    @Override
+    public void print(String prefix) {
+        System.out.println(prefix + type.toString());
+        if (keyWord != null)
+            System.out.println(prefix+"\tKeyword "+keyWord);
+        Listable iterator = firstChild;
+        while (iterator != null) {
+            iterator.print(prefix+"\t");
+            iterator = iterator.getNext();
+        }
+    }
 }

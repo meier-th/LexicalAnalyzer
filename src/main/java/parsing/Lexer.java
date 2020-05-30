@@ -17,8 +17,6 @@ public class Lexer implements YYParser.Lexer {
 
   /** lexical states */
   public static final int YYINITIAL = 0;
-  public static final int unary = 2;
-  public static final int normal = 4;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -27,7 +25,7 @@ public class Lexer implements YYParser.Lexer {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = { 
-     0,  0,  1,  1,  2, 2
+     0, 0
   };
 
   /** 
@@ -52,13 +50,13 @@ public class Lexer implements YYParser.Lexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\3\0\1\1\2\2\1\3\1\4\1\5\1\6\1\7"+
-    "\1\10\2\11\1\12\1\13\3\11\1\14\1\15\1\16"+
-    "\1\17\1\20\1\21\1\0\1\22\2\11\1\23\1\11"+
-    "\1\24\1\25\2\11\1\26";
+    "\1\0\1\1\2\2\1\3\1\4\1\5\1\6\1\7"+
+    "\1\10\2\11\1\12\1\13\1\14\1\15\3\11\1\16"+
+    "\1\0\1\17\2\11\1\20\1\11\1\21\1\22\2\11"+
+    "\1\23";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[36];
+    int [] result = new int[31];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -83,14 +81,13 @@ public class Lexer implements YYParser.Lexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\36\0\74\0\132\0\132\0\170\0\132\0\132"+
-    "\0\226\0\132\0\132\0\264\0\322\0\360\0\132\0\132"+
-    "\0\u010e\0\u012c\0\u014a\0\u0168\0\u0186\0\132\0\132\0\u01a4"+
-    "\0\132\0\u01c2\0\132\0\u01e0\0\u01fe\0\360\0\u021c\0\360"+
-    "\0\360\0\u023a\0\u0258\0\360";
+    "\0\0\0\36\0\36\0\74\0\36\0\36\0\132\0\36"+
+    "\0\36\0\170\0\226\0\264\0\36\0\36\0\36\0\36"+
+    "\0\322\0\360\0\u010e\0\u012c\0\u014a\0\36\0\u0168\0\u0186"+
+    "\0\264\0\u01a4\0\264\0\264\0\u01c2\0\u01e0\0\264";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[36];
+    int [] result = new int[31];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -113,28 +110,23 @@ public class Lexer implements YYParser.Lexer {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\4\2\5\1\6\1\7\1\10\1\11\1\12\1\13"+
-    "\1\14\1\15\2\16\2\4\1\17\1\20\1\21\2\16"+
-    "\1\22\1\16\1\23\4\16\1\24\1\16\13\0\3\25"+
-    "\1\26\1\27\1\17\1\20\12\25\1\30\1\25\1\0"+
-    "\1\4\2\5\1\6\1\7\1\10\1\11\1\12\1\13"+
-    "\1\14\1\15\2\16\1\31\1\4\1\17\1\20\1\21"+
-    "\2\16\1\22\1\16\1\23\4\16\1\24\1\16\41\0"+
-    "\1\5\41\0\1\32\40\0\1\33\36\0\1\16\1\34"+
-    "\1\16\4\0\12\16\1\0\1\16\13\0\3\16\4\0"+
-    "\12\16\1\0\1\16\13\0\3\16\4\0\1\16\1\35"+
-    "\10\16\1\0\1\16\13\0\3\16\4\0\4\16\1\36"+
-    "\5\16\1\0\1\16\13\0\3\16\4\0\6\16\1\37"+
-    "\3\16\1\0\1\16\34\0\1\24\14\0\3\25\4\0"+
-    "\12\25\1\0\1\25\34\0\1\30\2\0\2\32\1\5"+
-    "\33\32\12\0\2\16\1\40\4\0\12\16\1\0\1\16"+
-    "\13\0\3\16\4\0\2\16\1\41\7\16\1\0\1\16"+
-    "\13\0\3\16\4\0\7\16\1\42\2\16\1\0\1\16"+
-    "\13\0\3\16\4\0\10\16\1\43\1\16\1\0\1\16"+
-    "\13\0\3\16\4\0\11\16\1\44\1\0\1\16\1\0";
+    "\1\2\2\3\1\4\1\5\1\6\1\7\1\10\1\11"+
+    "\1\12\1\13\2\14\1\15\1\16\1\17\1\20\1\21"+
+    "\2\14\1\22\1\14\1\23\4\14\1\24\1\14\41\0"+
+    "\1\3\41\0\1\25\40\0\1\26\36\0\1\14\1\27"+
+    "\1\14\4\0\12\14\1\0\1\14\13\0\3\14\4\0"+
+    "\12\14\1\0\1\14\13\0\3\14\4\0\1\14\1\30"+
+    "\10\14\1\0\1\14\13\0\3\14\4\0\4\14\1\31"+
+    "\5\14\1\0\1\14\13\0\3\14\4\0\6\14\1\32"+
+    "\3\14\1\0\1\14\34\0\1\24\2\0\2\25\1\3"+
+    "\33\25\12\0\2\14\1\33\4\0\12\14\1\0\1\14"+
+    "\13\0\3\14\4\0\2\14\1\34\7\14\1\0\1\14"+
+    "\13\0\3\14\4\0\7\14\1\35\2\14\1\0\1\14"+
+    "\13\0\3\14\4\0\10\14\1\36\1\14\1\0\1\14"+
+    "\13\0\3\14\4\0\11\14\1\37\1\0\1\14\1\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[630];
+    int [] result = new int[510];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -172,11 +164,11 @@ public class Lexer implements YYParser.Lexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\3\0\2\11\1\1\2\11\1\1\2\11\3\1\2\11"+
-    "\5\1\2\11\1\1\1\11\1\0\1\11\11\1";
+    "\1\0\2\11\1\1\2\11\1\1\2\11\3\1\4\11"+
+    "\4\1\1\0\1\11\11\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[36];
+    int [] result = new int[31];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -643,112 +635,97 @@ public class Lexer implements YYParser.Lexer {
             { System.err.printf("Error: unknown lexem %s at line %d, char %d\n", yytext(), yyline + 1, yycolumn);
             } 
             // fall through
-          case 23: break;
+          case 20: break;
           case 2: 
             { 
             } 
             // fall through
-          case 24: break;
+          case 21: break;
           case 3: 
             { return PLUS;
             } 
             // fall through
-          case 25: break;
+          case 22: break;
           case 4: 
             { return MUL;
             } 
             // fall through
-          case 26: break;
+          case 23: break;
           case 5: 
             { return DIV;
             } 
             // fall through
-          case 27: break;
+          case 24: break;
           case 6: 
             { return LESS;
             } 
             // fall through
-          case 28: break;
+          case 25: break;
           case 7: 
             { return MORE;
             } 
             // fall through
-          case 29: break;
+          case 26: break;
           case 8: 
             { return AO;
             } 
             // fall through
-          case 30: break;
+          case 27: break;
           case 9: 
             { lvalue = yytext(); return IDENT;
             } 
             // fall through
-          case 31: break;
+          case 28: break;
           case 10: 
-            { return COM;
-            } 
-            // fall through
-          case 32: break;
-          case 11: 
-            { return LP;
-            } 
-            // fall through
-          case 33: break;
-          case 12: 
-            { lvalue = Integer.valueOf(yytext()); return CONST;
-            } 
-            // fall through
-          case 34: break;
-          case 13: 
-            { return IDENT;
-            } 
-            // fall through
-          case 35: break;
-          case 14: 
-            { return UMINUS;
-            } 
-            // fall through
-          case 36: break;
-          case 15: 
-            { return RP;
-            } 
-            // fall through
-          case 37: break;
-          case 16: 
-            { return CONST;
-            } 
-            // fall through
-          case 38: break;
-          case 17: 
             { return MIN;
             } 
             // fall through
-          case 39: break;
-          case 18: 
+          case 29: break;
+          case 11: 
+            { return RP;
+            } 
+            // fall through
+          case 30: break;
+          case 12: 
+            { return COM;
+            } 
+            // fall through
+          case 31: break;
+          case 13: 
+            { return LP;
+            } 
+            // fall through
+          case 32: break;
+          case 14: 
+            { lvalue = Integer.valueOf(yytext()); return CONST;
+            } 
+            // fall through
+          case 33: break;
+          case 15: 
             { return EQ;
             } 
             // fall through
-          case 40: break;
-          case 19: 
+          case 34: break;
+          case 16: 
             { return LDK;
             } 
             // fall through
-          case 41: break;
-          case 20: 
+          case 35: break;
+          case 17: 
             { return INV;
             } 
             // fall through
-          case 42: break;
-          case 21: 
+          case 36: break;
+          case 18: 
             { return KEY;
             } 
             // fall through
-          case 43: break;
-          case 22: 
+          case 37: break;
+          case 19: 
             { return LCK;
             } 
             // fall through
-          case 44: break;
+          case 38: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

@@ -1,6 +1,6 @@
 package semantics;
 
-public class Program {
+public class Program implements Printable {
 
     private SemanticList variablesDeclaration;
     private SemanticList computations;
@@ -10,5 +10,10 @@ public class Program {
         this.computations = computations;
     }
 
-
+    @Override
+    public void print(String prefix) {
+        System.out.println("Program");
+        variablesDeclaration.print("\t");
+        computations.print("\t");
+    }
 }

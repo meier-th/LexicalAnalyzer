@@ -1,13 +1,9 @@
 Var
-abc, bcd, cde, def,
-efg, ghi, hij
-abc > bcd
-ghi = 0
+abc, bcd
+WHILE 1 < 2 DO
+abc = 1
+bcd = 4
 // comment
-WHILE -def DO
-efg = hij + ghi
-// comment 2
-abc = 6 + 7
-cde = -abc
-def = (abc + bcd) * cde
-abc = bcd - cde
+WHILE bcd > abc DO
+abc = abc + 1
+bcd = -3 * ( abc + bcd ) * 3
