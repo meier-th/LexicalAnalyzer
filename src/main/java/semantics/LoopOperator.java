@@ -1,5 +1,6 @@
 package semantics;
 
+import state.OperationsHolder;
 import value.BooleanValue;
 import value.Value;
 
@@ -10,6 +11,10 @@ public class LoopOperator implements Operator {
 
     @Override
     public void execute() {
+        if (action instanceof LoopOperator)
+            OperationsHolder.executeBeforeEnd();
+        else
+            OperationsHolder.executeBeforeLoop();
         Value condValue = condition.getResultValue();
         if (condValue instanceof BooleanValue)
             while (((BooleanValue)condValue).getValue()) {

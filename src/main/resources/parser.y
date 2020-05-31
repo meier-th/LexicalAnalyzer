@@ -30,7 +30,7 @@ variablesList: IDENT {$$ = Variable.createVariable($1);} | IDENT COM variablesLi
 computations: operatorsList {$$ = new SemanticList(SemanticList.SemanticTypes.COMPUTATIONS, $1);};
 operatorsList: operator {$$ = new OperatorsList($1);} | operator operatorsList {$$ = new OperatorsList($1, $2);};
 operator: IDENT AO expression {$$ = new Assignment($1, $3); OperationsHolder.addAssignment((Assignment)$$);} |
-		LCK expression LDK operator {$$ = new LoopOperator($2, $4); OperationsHolder.executeBeforeLoop(); ((LoopOperator)$$).execute();};
+		LCK expression LDK operator {$$ = new LoopOperator($2, $4); ((LoopOperator)$$).execute();};
 expression: INV subexpression {$$ = new UnaryOperation(Operation.UnaryOperations.NOT, $2);} |
             MIN subexpression {$$ = new UnaryOperation(Operation.UnaryOperations.MINUS, $2);} |
             subexpression {$$ = $1;};

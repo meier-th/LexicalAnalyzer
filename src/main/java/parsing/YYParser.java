@@ -398,7 +398,7 @@ public class YYParser
   case 10:
   if (yyn == 10)
     /* "/home/meier/IdeaProjects/lexicalAnalyzer/src/main/resources/parser.y":33  */ /* lalr1.java:480  */
-    {yyval = new LoopOperator(((Operation)(yystack.valueAt (2))), ((Operator)(yystack.valueAt (0)))); OperationsHolder.executeBeforeLoop(); ((LoopOperator)yyval).execute();};
+    {yyval = new LoopOperator(((Operation)(yystack.valueAt (2))), ((Operator)(yystack.valueAt (0)))); ((LoopOperator)yyval).execute();};
   break;
     
 
